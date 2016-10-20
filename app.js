@@ -1,101 +1,106 @@
 'use strict';
-
+//
 var score = 0;
-
-alert('The first five questinos accept yes or no answers.');
-var question1 = prompt('Is Stephen from California?');
-if (question1.toLowerCase() === 'no' || question1.toLowerCase() === 'n') {console.log('Correct');
-  alert('Correct. Stephen is from Florida');
-  score = score + 1;
-} else {
-  console.log('Incorrect');
-  alert('Inorrect. Stephen is from Florida');
+var favoriteFoods = ['pizza', 'korean', 'sushi', 'pie'];
+//
+// QUESTION 1
+function yesNoQuestions(question , correctResponse , incorrectResponse, answerOne , answerTwo) {
+  var ans = prompt(question);
+  if (ans.toLowerCase() === answerOne || ans.toLowerCase() === answerTwo) {
+    console.log('Correct');
+    alert(correctResponse);
+    score = score + 1;
+  } else {
+    console.log('Incorrect');
+    alert(incorrectResponse);
+  }
 }
+alert('The first five questions accept yes or no answers.');
+yesNoQuestions('Is Stephen from California?' , 'Correct. Stephen is from Florida' , 'Inorrect. Stephen is from Florida' , 'no' , 'n');
 
-var question2 = prompt('Does Stephen have a cat?');
-if (question2.toLowerCase() === 'no' || question2.toLowerCase() === 'n') {console.log('Correct');
-  alert('Correct. Stephen does like cats though.');
-  score = score + 1;
-} else {
-  console.log('Incorrect');
-  alert('Incorrect. Stephen does like cats though');
-}
+yesNoQuestions('Does Stephen have a cat?' , 'Correct. Stephen does like cats though.' , 'Incorrect. Stephen does like cats though.' , 'no' , 'n');
 
-var question3 = prompt('Does Stephen like kimchi?');
-if (question3.toLowerCase() === 'yes' || question3.toLowerCase() === 'y') {console.log('Correct');
-  alert('Correct. Stephen loves Kimchi! and Korean bbq too.');
-  score = score + 1;
-} else {
-  console.log('Incorrect.');
-  alert('Incorrect. Stephen loves Kimchi! and Korean bbq too.');
-}
+yesNoQuestions('Does Stephen like kimchi?' , 'Correct. Stephen loves Kimchi! and Korean bbq too.' , 'Incorrect. Stephen loves Kimchi! and Korean bbq too.' , 'yes' , 'y');
 
-var question4 = prompt('Did Stephen graduate from university?');
-if (question4.toLowerCase() === 'yes' || question4.toLowerCase() === 'y') {console.log('Correct');
-  alert('Correct. Stephen graduated from The American University with a degree in Business Administration');
-  score = score + 1;
-} else {
-  console.log('Incorrect.');
-  alert('Incorrect. Stephen graduated from The American University with a degree in Business Administration');
-}
+yesNoQuestions('Did Stephen graduate from university?' , 'Correct. Stephen graduated from The American University with a degree in Business Administration' , 'Incorrect. Stephen graduated from The American University with a degree in Business Administration' , 'yes' , 'y');
 
-var question5 = prompt('Would Stephen like to start a business?');
-if (question5.toLowerCase() === 'yes' || question5.toLowerCase() === 'y') {console.log('correct');
-  alert('Correct. Someday Stephen would like to start his own business.');
-  score = score + 1;
-} else {
-  console.log('Incorrect.');
-  alert('Incorrect. Someday Stephen would like to start his own business.');
-}
+yesNoQuestions('Would Stephen like to start a business?' , 'Correct. Someday Stephen would like to start his own business.' , 'Incorrect. Someday Stephen would like to start his own business.' , 'yes' , 'y');
 
 alert('These last two questinos accept all forms of answer');
 
-for (var attempts = 0; attempts < 4; attempts ++) {
-  var question6 = prompt('Can you guess how many dogs have I had in my life? Hint: < 10');
-  if (question6 === 5) {
-    console.log('correct');
-    alert('Correct, Stephen has had 5 dogs throughout his life');
-    score = score + 1;
-    attempts = attempts + 4;
-  } else if (attempts < 3 && question6 < 5) {
-    console.log('Incorrect');
-    alert('Incorrect. Your answer is too small. Please try again. You have ' + (3 - attempts) + ' remaining.');
-  } else if (attempts < 3 && question6 > 5) {
-    console.log('Incorrect');
-    alert('Incorrect. Your answer is too large. Please try again. You have ' + (3 - attempts) + ' remaining.');
-  } else {
+function guessNumber(question , correctResponse , tooSmall , tooLarge , noAttempts , correctAnswer, optionAttempt){
+  for (var attempts = 0; attempts < optionAttempt; attempts++) {
+    var ans = prompt(question);
+    if (parseInt(ans) === correctAnswer) {
+      console.log('correct');
+      alert(correctResponse);
+      score += 1;
+      break;
+    } else if (attempts < optionAttempt && parseInt(ans) < correctAnswer) {
+      console.log('Incorrect');
+      alert(tooSmall);
+      // attempts += 1;
+    } else if (attempts < optionAttempt && parseInt(ans) > correctAnswer) {
+      console.log('Incorrect');
+      alert(tooLarge);
+      // attempts += 1;
+    }
+  }
+  if (attempts === 4) {
     console.log('Incorrect.');
-    alert('You have run out of attempts. Stephen has had 5 dogs throughout his life');
+    alert(noAttempts);
   }
 }
 
-favoriteFoods = [pizza, korean, sushi, pie];
+guessNumber('Can you guess how many dogs have I had in my life? Hint: < 10' , 'Correct, Stephen has had 5 dogs throughout his life' , 'Incorrect. Your answer is too small. Please try again.' , 'Incorrect. Your answer is too large. Please try again.' , 'You have run out of attempts. Stephen has had 5 dogs throughout his life' , 5 , 4);
 
-for (var q7attempts = 0; attempts < 6; attempts ++) {
-  var question7 = prompt('Can you guess one of my favorite foods?');
-  i = 0;
-  while (question question7 != favoriteFoods[i] && i < favoriteFoods.length) {
-    i++
-  }
-  if (question7.toLowerCase() = favoriteFoods[i]) {
-    console.log('Correct. The accepted answers are ' + favoriteFoods[0] + ', ' + favoriteFoods[1] + ', ' + favoriteFoods[2] + ', ' + favoriteFoods[3] + '.')
-    alert('Correct. The accepted answers are ' + favoriteFoods[0] + ', ' + favoriteFoods[1] + ', ' + favoriteFoods[2] + ', ' + favoriteFoods[3] + '.')
-    score = score + 1;
-    q7attempts = q7attempts + 6;
-  } else if (attempts < 6) {
-    console.log('Incorrect.')
-    alert('Incorrect. Please try again. You have ' + (5 - q7attempts) ' remaining.')
-  } else {
-    console.log('Incorrect');
-    alert('You have run out of attempts. The accepted answers are ' + favoriteFoods[0] + ', ' + favoriteFoods[1] + ', ' + favoriteFoods[2] + ', ' + favoriteFoods[3] + '.')
-  }
-  }
+// for (var attempts = 0; attempts < 4; attempts ++) {
+//   var question6 = prompt('Can you guess how many dogs have I had in my life? Hint: < 10');
+//   if (parseInt(question6) === 5) {
+//     console.log('correct');
+//     alert('Correct, Stephen has had 5 dogs throughout his life');
+//     score = score + 1;
+//     attempts = attempts + 4;
+//   } else if (attempts < 3 && question6 < 5) {
+//     console.log('Incorrect');
+//     alert('Incorrect. Your answer is too small. Please try again. You have ' + (3 - attempts) + ' attempts remaining.');
+//   } else if (attempts < 3 && question6 > 5) {
+//     console.log('Incorrect');
+//     alert('Incorrect. Your answer is too large. Please try again. You have ' + (3 - attempts) + ' attempts remaining.');
+//   } else {
+//     console.log('Incorrect.');
+//     alert('You have run out of attempts. Stephen has had 5 dogs throughout his life');
+//   }
+// }
 
-if (score = 7) {
-  console.log('You earned a perfect score!');
-  alert('Congratulations!');
-  alert('You earned a perfect score! You know me really well.');
-} else {
-  console.log('You answered ' + score + '/7 questions correctly.');
-  alert('You answered ' + score + '/7 questions correctly. Maybe we should spend more time together.');
+function guessString ( guessLimit , correctAnswer , question , correctResponse , incorrectResponse , noAttempts) {
+  for (var attempts1 = 0; attempts1 < guessLimit; attempts1 ++) {
+    var ans = prompt(question);
+    i = 0;
+    while (ans !== correctAnswer[i] && i < correctAnswer.length) {
+      i++;
+    }
+    if (ans.toLowerCase() === correctAnswer[i]) {
+      console.log(correctResponse);
+      alert(correctResponse);
+      score += 1;
+      break;
+    } else if (attempts1 < guessLimit) {
+      console.log(incorrectResponse);
+      alert(incorrectResponse);
+    } else {
+      console.log(noAttempts);
+      alert(noAttempts);
+    }
+  }
+  guessString(6, favoriteFoods , 'Can you guess one of my favorite foods?' , 'Correct. The accepted answers are' + favoriteFoods.split(', ') , 'Incorrect. Please try again. You have ' + (5 - attempts1) + ' remaining.' , 'You have run out of attempts. The accepted answers are ' + favoriteFoods.split(', ') );
 }
+//
+// if (score = 7) {
+//   console.log('You earned a perfect score!');
+//   alert('Congratulations!');
+//   alert('You earned a perfect score! You know me really well.');
+// } else {
+//   console.log('You answered ' + score + '/7 questions correctly.');
+//   alert('You answered ' + score + '/7 questions correctly. Maybe we should spend more time together.');
+// }
